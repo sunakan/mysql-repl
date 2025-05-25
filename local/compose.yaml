@@ -1,0 +1,58 @@
+---
+
+services:
+  mysql-1111:
+    working_dir: /root/works/
+    image: mysql:8.0-oracle
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: hoge
+    volumes:
+      - type: bind
+        source: ${PWD}/etc/mysql-1111/my.cnf
+        target: /etc/mysql/my.cnf
+      - type: bind
+        source: ${PWD}/docker-entrypoint-initdb.d/
+        target: /docker-entrypoint-initdb.d/
+
+  mysql-2222:
+    working_dir: /root/works/
+    image: mysql:8.0-oracle
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+    volumes:
+      - type: bind
+        source: ${PWD}/etc/mysql-2222/my.cnf
+        target: /etc/mysql/my.cnf
+      - type: bind
+        source: ${PWD}/
+        target: /root/works/
+
+  mysql-3333:
+    working_dir: /root/works/
+    image: mysql:8.0-oracle
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+    volumes:
+      - type: bind
+        source: ${PWD}/etc/mysql-3333/my.cnf
+        target: /etc/mysql/my.cnf
+      - type: bind
+        source: ${PWD}/
+        target: /root/works/
+
+  # datadog用
+  #datadog-agent:
+  #  image: datadog/agent:7.46.0
+  #  environment:
+  #    MYSQL_HOST: "mysql"
+  #    DD_HOSTNAME: "mysql-ops-suna-ex"
+  #    DD_API_KEY: "${DD_API_KEY}"
+  #    DD_SITE: "${DD_SITE}"
+  #    DD_LOGS_ENABLED: false
+  #  volumes:
+  #    - type: bind
+  #      source: ${PWD}/datadog/conf.d/
+  #      target: /conf.d/
+  #  depends_on:
+  #    - mysql

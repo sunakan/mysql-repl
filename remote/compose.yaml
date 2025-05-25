@@ -1,0 +1,13 @@
+---
+
+services:
+  mysql:
+    working_dir: /root/works/
+    entrypoint: ''
+    image: mysql:8.0-oracle
+    env_file:
+      - .env
+    volumes:
+      - type: bind
+        source: ${PWD}/
+        target: /root/works/
