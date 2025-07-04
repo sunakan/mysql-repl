@@ -7,7 +7,11 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: true
       MYSQL_DATABASE: hoge
+      LANG: C.utf8
     volumes:
+      - type: bind
+        source: ${PWD}/
+        target: /root/works/
       - type: bind
         source: ${PWD}/etc/mysql-1111/my.cnf
         target: /etc/mysql/my.cnf
@@ -20,6 +24,7 @@ services:
     image: mysql:8.0-oracle
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: true
+      LANG: C.utf8
     volumes:
       - type: bind
         source: ${PWD}/etc/mysql-2222/my.cnf
@@ -33,6 +38,7 @@ services:
     image: mysql:8.0-oracle
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: true
+      LANG: C.utf8
     volumes:
       - type: bind
         source: ${PWD}/etc/mysql-3333/my.cnf
